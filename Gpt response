@@ -1,0 +1,90 @@
+Here’s a clear, step-by-step explanation of the Options class in Selenium Java, in the correct order you’d typically learn and use it:
+1️⃣ What is Options Class?
+In Selenium Java, an Options class is used to configure the browser before launching it.
+👉 In simple terms:
+It tells the browser how to start and behave during automation.
+2️⃣ Why Do We Use It?
+Without options → browser opens with default settings
+With options → you can control behavior
+Examples:
+Open in incognito mode
+Run in headless mode
+Disable notifications
+Set download location
+Handle SSL certificates
+3️⃣ Types of Options Classes
+Each browser has its own Options class:
+ChromeOptions → for Chrome
+FirefoxOptions → for Firefox
+EdgeOptions → for Edge
+4️⃣ Basic Flow (Very Important)
+This is the correct order:
+Step 1: Create Options object
+Java
+ChromeOptions options = new ChromeOptions();
+Step 2: Add settings to options
+Java
+options.addArguments("--incognito");
+options.addArguments("--start-maximized");
+Step 3: Pass options to driver
+Java
+WebDriver driver = new ChromeDriver(options);
+👉 This order must always be followed.
+5️⃣ Common Methods in Options Class
+✔️ 1. addArguments()
+Used to pass browser commands
+Java
+options.addArguments("--disable-notifications");
+options.addArguments("--headless=new");
+✔️ 2. setExperimentalOption() (Chrome only)
+Used for advanced settings
+Java
+options.setExperimentalOption("excludeSwitches", 
+    Arrays.asList("enable-automation"));
+✔️ 3. setAcceptInsecureCerts()
+Used to ignore SSL certificate errors
+Java
+options.setAcceptInsecureCerts(true);
+✔️ 4. setPreference / prefs (Downloads etc.)
+Java
+Map<String, Object> prefs = new HashMap<>();
+prefs.put("download.default_directory", "C:\\Downloads");
+
+options.setExperimentalOption("prefs", prefs);
+6️⃣ Real-Time Example
+Java
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.*;
+
+public class Test {
+    public static void main(String[] args) {
+
+        ChromeOptions options = new ChromeOptions();
+
+        options.addArguments("--incognito");
+        options.addArguments("--disable-notifications");
+        options.setAcceptInsecureCerts(true);
+
+        WebDriver driver = new ChromeDriver(options);
+
+        driver.get("https://example.com");
+    }
+}
+7️⃣ Options vs DesiredCapabilities
+Old way:
+Java
+DesiredCapabilities cap = new DesiredCapabilities();
+New way: ✔️ Use Options class instead
+✔️ More modern and cleaner
+✔️ Fully supported in latest Selenium
+8️⃣ Key Points to Remember
+Options class is used before launching browser
+It customizes browser behavior
+Each browser has its own Options class
+Always follow order: Create → Configure → Pass to Driver
+9️⃣ One-Line Definition (for interviews)
+👉 “Options class in Selenium is used to customize and configure browser settings before initializing the WebDriver.”
+If you want, I can next explain:
+🔥 �⁠Advanced options (Proxy, Mobile Emulation, Remote Grid)
+🎯 �⁠Interview questions + answers
+🧠 �⁠Common mistakes beginners make
