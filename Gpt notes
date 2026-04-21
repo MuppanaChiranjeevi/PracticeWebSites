@@ -1,0 +1,72 @@
+In Selenium (Java), the Options classes are used to configure browser-specific settings before launching the browser. They let you control how the browser behaves—things like running in headless mode, setting arguments, handling certificates, or customizing profiles.
+🔹 What is Options Class?
+In Selenium WebDriver, each browser has its own Options class:
+ChromeOptions → for Chrome
+FirefoxOptions → for Firefox
+EdgeOptions → for Edge
+These classes extend a common base and allow you to customize browser capabilities.
+🔹 Why use Options class?
+You use it when you want to:
+Run tests in headless mode (no UI)
+Disable notifications or popups
+Set browser window size
+Accept insecure SSL certificates
+Add extensions
+Customize browser behavior for automation
+🔹 Example: ChromeOptions in Java
+Java
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+
+public class OptionsExample {
+    public static void main(String[] args) {
+        ChromeOptions options = new ChromeOptions();
+        
+        // Add arguments
+        options.addArguments("--start-maximized");
+        options.addArguments("--disable-notifications");
+        
+        // Headless mode
+        options.addArguments("--headless=new");
+        
+        // Accept insecure certificates
+        options.setAcceptInsecureCerts(true);
+
+        WebDriver driver = new ChromeDriver(options);
+        driver.get("https://example.com");
+    }
+}
+🔹 Common Methods in Options Class
+1. addArguments()
+Used to pass browser arguments:
+Java
+options.addArguments("--incognito");
+options.addArguments("--disable-gpu");
+2. setExperimentalOption()
+Used for advanced settings:
+Java
+options.setExperimentalOption("excludeSwitches", 
+                              Arrays.asList("enable-automation"));
+3. setAcceptInsecureCerts(true)
+Accepts SSL certificate errors.
+4. setCapability()
+Used to merge capabilities:
+Java
+options.setCapability("browserVersion", "latest");
+🔹 FirefoxOptions Example
+Java
+FirefoxOptions options = new FirefoxOptions();
+options.addArguments("-private");
+WebDriver driver = new FirefoxDriver(options);
+🔹 Key Interview Points
+Options class is used to customize browser launch settings
+It replaces older DesiredCapabilities (now mostly deprecated)
+Each browser has its own Options class
+It is passed to WebDriver during initialization
+🔹 Simple Real-Time Use Case
+In real projects, you might:
+Disable notifications for login automation
+Run tests in headless mode in CI/CD pipelines
+Use incognito mode to avoid cache issues
+If you want, I can give you �⁠interview questions on Selenium Options class or a �⁠real project example using it.
